@@ -1,0 +1,5 @@
+title: V4L2 Injection Framework
+description: Kernel-level Android camera pipeline manipulation for security research.
+theme: jekyll-theme-minimal
+show_downloads: false
+google_analytics: UA-XXXXXXXXX-X   # Replace with your own GA tracking ID if desired

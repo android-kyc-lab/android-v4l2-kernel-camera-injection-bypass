@@ -1,0 +1,29 @@
+# Binaries - distributed via Telegram
+*.apk
+*.ko
+*.zip
+*.tar.gz
+*.so
+
+# Build outputs
+*.o
+*.a
+*.out
+build/
+out/
+
+# Android specific
+*.iml
+.gradle/
+local.properties
+.idea/
+*.swp
+
+# Kernel compilation artifacts
+arch/arm64/boot/Image*
+Module.symvers
+.mod.c
+
+# OS junk
+.DS_Store
+Thumbs.db
