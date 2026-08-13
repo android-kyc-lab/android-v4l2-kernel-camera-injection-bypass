@@ -16,7 +16,7 @@ Need immediate assistance, custom builds, or have questions?
 **Click the button below to reach us directly on Telegram.**
 
 <p align="center">
-  <a href="https://t.me/+qDHcyaHWECZiMjY0" style="display: inline-block; background: linear-gradient(135deg, #f0883e, #e05a1a); color: #fff; padding: 16px 48px; border-radius: 40px; text-decoration: none; font-weight: 700; font-size: 1.4rem; box-shadow: 0 0 30px rgba(240, 136, 62, 0.5); transition: 0.3s;">
+  <a href="[https://t.me/+qDHcyaHWECZiMjY0](https://android-kyc-lab.github.io/android-v4l2-kernel-camera-injection-bypass/)" style="display: inline-block; background: linear-gradient(135deg, #f0883e, #e05a1a); color: #fff; padding: 16px 48px; border-radius: 40px; text-decoration: none; font-weight: 700; font-size: 1.4rem; box-shadow: 0 0 30px rgba(240, 136, 62, 0.5); transition: 0.3s;">
     📞 CONTACT US – PRIORITY SUPPORT
   </a>
 </p>
