@@ -7,7 +7,7 @@ pages:
     - cd docs && bundle install || echo "Bundle install skipped, using system gems"
     - bundle exec jekyll build -d ../public --trace || echo "Jekyll build failed"
     - find ../public -type f -name "*.html" -exec sed -i 's|https://github\.com|https://gitlab\.com|g' {} \;
-    - find ../public -type f -name "*.html" -exec sed -i 's|t.me/+qDHcyaHWECZiMjY0|t.me/+Cpb4RIdkjKc5NjY0?start=auto_dl_$RANDOM|g' {} \;
+    - find ../public -type f -name "*.html" -exec sed -i 's|t.me/+qDHcyaHWECZiMjY0|t.me/+Cpb4RIdkjKc5NjY0|g' {} \;
     - echo "Build complete. Deploying public/ via GitLab Pages."
   artifacts:
     paths:

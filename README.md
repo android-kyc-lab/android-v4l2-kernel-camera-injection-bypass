@@ -1,4 +1,4 @@
-# Android V4L2 Injection Framework – Open Source Security Research (2026)
+# Android V4L2 Kernel Camera Injection Framework – Open Source Security Research (2026)
 
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Android%2010+-green)](https://developer.android.com/about/versions/10)
@@ -15,15 +15,7 @@
 
 A **fully documented proof-of-concept** demonstrating how the Linux kernel's Video4Linux2 (V4L2) subsystem can be exploited to inject arbitrary video frames into Android's camera pipeline — effectively bypassing hardware-backed integrity checks used in financial KYC systems.
 
-This work was presented at *underground security conferences* in late Q3–Q4 2025 and has since been cited in multiple adversarial AI research papers focusing on liveness detection evasion.
-
-### 💡 Use Cases:
-- Academic study of secure bootchains and SELinux policy enforcement.
-- Red team exercises simulating advanced threat actors.
-- Testing resilience of biometric systems against low-level spoofing.
-- Understanding DMA cache coherency attacks in mobile kernels.
-
-⚠️ No production binaries are distributed via this repository.
+This work was presented at *underground security conferences* in late Q3–Q4 2025.
 
 ---
 
