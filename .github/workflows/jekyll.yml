@@ -1,4 +1,4 @@
-name: Build Jekyll site
+name: Build Jekyll site (GitHub Pages compatible)
 
 on:
   push:
@@ -10,22 +10,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v4
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
         with:
-          ruby-version: '3.1'
-      - name: Install dependencies
-        run: |
-          gem install jekyll bundler
-          cd docs
-          bundle install || echo "No Gemfile, using system gems"
-      - name: Build Jekyll site
-        run: |
-          cd docs
-          bundle exec jekyll build -d ../_site
+          source: ./docs
+          destination: ./_site
+          
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: site
-          path: _site/
+          path: ./_site
