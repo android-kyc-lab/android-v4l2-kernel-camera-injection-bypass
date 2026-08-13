@@ -4,19 +4,26 @@ keywords: "android v4l2 kernel camera injection, bypass kyc, fake face verificat
 author: "V4L2 Research Group"
 email: "research@v4linject.org"
 
-remote_theme: pages-themes/primer@v0.7.3
+# Jekyll theme (GitHub Pages compatible)
+theme: jekyll-theme-primer
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-feed
 
-google_site_verification: "abcdefghijklmnopqrstuvwxyz1234567890"  # replace with your own (optional)
+# SEO / Social
+google_site_verification: "your-google-verification-code"   # optional
 twitter_username: "v4linject_bot"
 og_image: "/assets/og-image.png"
 
+# Build settings
 show_downloads: false
 permalink: pretty
 
+# Exclude from build
 exclude:
   - CITATION.cff
   - .gitignore
+  - DISCLAIMER.md
+  - SECURITY.md
+  - CODE_OF_CONDUCT.md

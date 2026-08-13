@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://android-kyc-lab.github.io/android-v4l2-kernel-camera-injection-bypass/sitemap.xml
