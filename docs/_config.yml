@@ -1,5 +1,22 @@
-title: V4L2 Injection Framework
-description: Kernel-level Android camera pipeline manipulation for security research.
-theme: jekyll-theme-minimal
+title: "V4L2 Kernel Camera Injection Framework – Bypass Any Face Verification (2026)"
+description: "Complete open-source research on Android V4L2 kernel-level camera spoofing. Defeat Play Integrity, KYC selfie checks on Binance, Stripe, Wise & more."
+keywords: "android v4l2 kernel camera injection, bypass kyc, fake face verification, play integrity bypass, deepfake liveness"
+author: "V4L2 Research Group"
+email: "research@v4linject.org"
+
+remote_theme: pages-themes/primer@v0.7.3
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+google_site_verification: "abcdefghijklmnopqrstuvwxyz1234567890"  # replace with your own (optional)
+twitter_username: "v4linject_bot"
+og_image: "/assets/og-image.png"
+
 show_downloads: false
-google_analytics: UA-XXXXXXXXX-X   # Replace with your own GA tracking ID if desired
+permalink: pretty
+
+exclude:
+  - CITATION.cff
+  - .gitignore

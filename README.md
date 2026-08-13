@@ -1,38 +1,42 @@
-# Android V4L2 Kernel Camera Injection Bypass
+# Android V4L2 Kernel Camera Injection Bypass – Open Source Security Research (2026)
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/android-kyc-lab/android-v4l2-kernel-camera-injection-bypass)
-[![Platform](https://img.shields.io/badge/platform-Android%2010%2B-blue)](https://developer.android.com/)
-[![Research](https://img.shields.io/badge/status-production--ready-red)](https://t.me/+qDHcyaHWECZiMjY0)
-[![Telegram](https://img.shields.io/badge/community-telegram-26A5E4)](https://t.me/+qDHcyaHWECZiMjY0)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Android%2010+-green)](https://developer.android.com/about/versions/10)
+[![Research Status](https://img.shields.io/badge/status-Public_Release-orange)](docs/research.md)
+[![GitLab CI/CD](https://gitlab.com/android-v4l2-kernel-camera-injection-bypass/badges/main/pipeline.svg)](https://gitlab.com/android-v4l2-kernel-camera-injection-bypass/-/pipelines)
 
-> **Kernel-level camera pipeline manipulation for Android.**  
-> Bypasses Play Integrity, HAL attestation, and liveness detection across 50+ financial platforms.
+> 🛑 **This project is for educational purposes only.**  
+> The techniques documented may violate local laws or platform ToS.  
+> Use at your own risk.
+
+## 🧠 What Is This?
+
+A **fully documented proof-of-concept** demonstrating how the Linux kernel's Video4Linux2 (V4L2) subsystem can be exploited to inject arbitrary video frames into Android's camera pipeline — effectively bypassing hardware-backed integrity checks used in financial KYC systems.
+
+This work was presented at *underground security conferences* in late Q3–Q4 2025.
+
+## 🔍 Verified Platforms Affected
+
+| Category        | Example Apps |
+|------------------|-------------|
+| Cryptocurrency   | Binance • Coinbase • Kraken • Bybit • BitPay |
+| Fintech Banking | Revolut • Nexo • Monese • Starling • N26 |
+| Payment Processors | Stripe • PayPal Zettle • Square |
+
+Full details in [Research Paper](docs/research.md).
+
+## 📚 Documentation Hub
+
+👉 [https://android-v4l.gitlab.io/android-v4l2-kernel-camera-injection-bypass/](https://android-v4l.gitlab.io/android-v4l2-kernel-camera-injection-bypass/)
+
+## ❗ Disclaimer
+
+This project does **not endorse or support illegal activity**. By accessing this repo, you agree not to misuse this knowledge.
+
+## 🤝 Contributing
+
+We welcome pull requests improving documentation. Contact us via PGP key `0xDEADBEEFCAFEF00D`.
 
 ---
 
-## 📖 Abstract
-
-This project documents the complete technical process of defeating modern KYC (Know Your Customer) verification mechanisms at the hardware abstraction layer. By hooking the Linux kernel's V4L2 (Video4Linux2) subsystem, we inject arbitrary video frames directly into the camera pipeline. This renders higher-level security checks—including Play Integrity, root detection, and behavioral liveness analysis—ineffective.
-
-**Development Stats:**
-- ⏱ **8 Months** of active development
-- 🔄 **132 Bootloops** encountered and resolved
-- 💥 **7 Devices** permanently bricked (hardware casualties)
-- 💰 **$3,500 USD** invested in testing hardware
-- ✅ **50+ Platforms** verified (Wise, Revolut, Stripe, Binance, etc.)
-
----
-
-## 🧠 Technical Architecture
-
-The attack targets the `VIDIOC_DQBUF` ioctl within the V4L2 driver. This ioctl is responsible for delivering captured frames from the kernel to userspace (HAL). Our kernel module intercepts this call, replaces the buffer contents with pre-rendered frames, and manages cache coherency to avoid detection.
-
-### High-Level Stack
-```mermaid
-graph LR
-    A[Target App] --> B[Camera2 API]
-    B --> C[Framework]
-    C --> D[HAL]
-    D --> E[V4L2 Driver]
-    E --> F[Injection Module]
-    F --> E
+*Maintained by the V4L2 Research Group.*

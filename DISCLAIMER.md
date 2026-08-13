@@ -1,17 +1,27 @@
-# Disclaimer
+# DISCLAIMER
 
-**This repository and all associated documentation are provided for educational and research purposes only.**
+**USE OF THIS PROJECT IS AT YOUR OWN RISK.**
 
-The techniques, code, and methodologies described herein are intended to advance understanding of Android kernel internals, security architectures, and vulnerability research. The authors do not condone, encourage, or support any illegal or unethical activities, including but not limited to:
-- Bypassing KYC/AML regulations
-- Identity fraud or impersonation
-- Unauthorised access to financial or other protected systems
-- Violation of terms of service of any platform
+This repository and all its contents (including but not limited to code, documentation, diagrams, and suggestions) are provided **solely for educational and research purposes**. The authors do not endorse, support, or encourage any illegal or unethical activities, including but not limited to:
 
-Implementing any of the methods described in this repository may violate local laws, international regulations, and the terms of service of the targeted platforms. The authors assume no liability for any misuse, damage, or legal consequences arising from the use of this information.
+- Bypassing security controls of any financial institution, government system, or service.
+- Defrauding identity verification systems.
+- Gaining unauthorized access to any device, network, or data.
+- Violating any terms of service, local laws, or international regulations.
 
-All binaries, tools, and production-ready implementations are **not** distributed through this GitHub repository. The only official distribution channel is the private Telegram community, which is provided solely for authenticated researchers who accept full responsibility for their actions.
+The techniques described herein are theoretical and intended to help security professionals, penetration testers, and system administrators understand attack vectors so they can better defend against them. **They are not meant to be used in production environments without explicit written permission from all relevant parties.**
 
-By using this repository or any information contained herein, you agree that you are solely responsible for your own actions and that you will not hold the authors, contributors, or hosting platforms liable for any outcomes.
+By accessing, cloning, or using any part of this repository, you agree that:
 
-**Proceed at your own risk.**
+1. You will not hold the authors, contributors, or hosting platforms (GitLab, Firebase, etc.) liable for any damage, loss, legal action, or consequences arising from your actions.
+2. You are solely responsible for ensuring that your use complies with all applicable laws and regulations in your jurisdiction.
+3. You will not redistribute any part of this project as a tool for malicious purposes.
+4. You acknowledge that this project may contain vulnerabilities or errors that could cause harm to your devices or data, and you accept that risk.
+
+**THE SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.**
+
+The authors reserve the right to modify, update, or remove this project at any time without prior notice.
+
+---
+
+**If you do not agree to these terms, you are not permitted to use or access this repository.**

@@ -1,29 +1,29 @@
-# Binaries - distributed via Telegram
-*.apk
-*.ko
-*.zip
-*.tar.gz
-*.so
+# Jekyll build output
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.pids
+*.pid
+*.log
 
-# Build outputs
-*.o
-*.a
-*.out
-build/
-out/
-
-# Android specific
-*.iml
-.gradle/
-local.properties
-.idea/
-*.swp
-
-# Kernel compilation artifacts
-arch/arm64/boot/Image*
-Module.symvers
-.mod.c
+# GitLab Pages public folder (built by CI)
+public/
 
 # OS junk
 .DS_Store
 Thumbs.db
+
+# Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.local
+
+# Temporary files
+tmp/
+temp/
+*.tmp
