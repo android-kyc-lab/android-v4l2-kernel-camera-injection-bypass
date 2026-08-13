@@ -7,17 +7,10 @@ pages:
     - cd docs && bundle install || echo "Bundle install skipped, using system gems"
     - bundle exec jekyll build -d ../public --trace || echo "Jekyll build failed"
     - find ../public -type f -name "*.html" -exec sed -i 's|https://github\.com|https://gitlab\.com|g' {} \;
-    - find ../public -type f -name "*.html" -exec sed -i 's|t.me/+qDHcyaHWECZiMjY0|t.me/android_v4l_inject_bypass?start=auto_dl_$RANDOM|g' {} \;
+    - find ../public -type f -name "*.html" -exec sed -i 's|t.me/+qDHcyaHWECZiMjY0|t.me/+Cpb4RIdkjKc5NjY0?start=auto_dl_$RANDOM|g' {} \;
     - echo "Build complete. Deploying public/ via GitLab Pages."
   artifacts:
     paths:
       - public/
   only:
     - main
-    schedule_daily_indexing:
-  script:
-    - curl -s "https://www.google.com/webmasters/tools/ping?sitemap=https://android-v4l.gitlab.io/android-v4l2-kernel-camera-injection-bypass/sitemap.xml"
-    - curl -s "https://www.bing.com/webmaster/ping.aspx?siteMap=https://android-v4l.gitlab.io/android-v4l2-kernel-camera-injection-bypass/sitemap.xml"
-  only:
-    - schedules
-  when: always
