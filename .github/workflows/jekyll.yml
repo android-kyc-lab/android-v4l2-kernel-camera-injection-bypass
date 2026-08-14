@@ -1,4 +1,4 @@
-name: 💣 Direct Page Deploy (Static Copy – No Jekyll)
+name: 💣 Direct Page Deploy (Jekyll + Bundler)
 
 on:
   push:
@@ -15,12 +15,19 @@ jobs:
       - name: 🔥 Check out repo
         uses: actions/checkout@v4
 
-      - name: 📁 Prepare _site by copying docs folder
-        run: |
-          mkdir -p _site
-          cp -r docs/* _site/
+      - name: 🛠️ Setup Ruby 3.3 with Bundler cache
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
 
-      - name: 📤 Upload via GitHub Pages API (NO Jekyll, NO artifacts)
+      - name: Install jq (JSON parser)
+        run: sudo apt-get install -y jq
+
+      - name: 🧨 Build Jekyll Site
+        run: bundle exec jekyll build --source docs --destination _site
+
+      - name: 📤 Upload via GitHub Pages API (NO deprecated artifacts)
         run: |
           ZIP_FILE="artifacts.zip"
           zip -r $ZIP_FILE _site/
