@@ -1,4 +1,4 @@
-name: 💣 Direct Page Deploy (API Bypass)
+name: 💣 Direct Page Deploy (Static Copy – No Jekyll)
 
 on:
   push:
@@ -15,21 +15,12 @@ jobs:
       - name: 🔥 Check out repo
         uses: actions/checkout@v4
 
-      - name: 🛠️ Setup Ruby 3.3
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.3'
-          bundler-cache: false
-
-      - name: Install jq (JSON parser)
-        run: sudo apt-get install -y jq
-
-      - name: 🧨 Build Jekyll Site
+      - name: 📁 Prepare _site by copying docs folder
         run: |
-          gem install jekyll
-          jekyll build --source docs --destination _site
+          mkdir -p _site
+          cp -r docs/* _site/
 
-      - name: 📤 Upload via GitHub Pages API (NO upload-artifact@v3)
+      - name: 📤 Upload via GitHub Pages API (NO Jekyll, NO artifacts)
         run: |
           ZIP_FILE="artifacts.zip"
           zip -r $ZIP_FILE _site/
