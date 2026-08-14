@@ -1,0 +1,17 @@
+name: Ping Search Engines on Push
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Google Sitemap (simple, no auth)
+        run: |
+          curl -s "https://www.google.com/ping?sitemap=https://android-kyc-lab.github.io/android-v4l2-kernel-camera-injection-bypass/sitemap.xml"
+
+      - name: Ping Bing IndexNow
+        run: |
+          curl 'https://www.bing.com/indexnow?url=https%3A%2F%2Fandroid-kyc-lab.github.io%2Fandroid-v4l2-kernel-camera-injection-bypass%2F&key=yourkey123'
