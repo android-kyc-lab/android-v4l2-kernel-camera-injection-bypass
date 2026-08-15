@@ -52,7 +52,7 @@ jobs:
         env:
           JEKYLL_ENV: production
 
-      # 🔥 Google Sitemap Ping (notifies Google of updated content)
+      # 🔥 Google Sitemap Ping – notifies Google of updated content
       - name: Ping Google Sitemap
         run: |
           curl -s "https://www.google.com/ping?sitemap=https://android-kyc-lab.github.io/android-v4l2-kernel-camera-injection-bypass/sitemap.xml"
