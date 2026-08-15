@@ -1,50 +1,46 @@
-name: 💣 Direct Page Deploy (Jekyll + Bundler)
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
-  build-and-upload:
+  build:
     runs-on: ubuntu-24.04
     permissions:
+      contents: read
       pages: write
       id-token: write
 
     steps:
-      - name: 🔥 Check out repo
+      - name: 🚪 Check out repo
         uses: actions/checkout@v4
 
-      - name: 🛠️ Setup Ruby 3.3 with Bundler cache
+      - name: 🛠️ Setup Ruby with Bundler cache
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
           bundler-cache: true
 
-      - name: Install jq (JSON parser)
-        run: sudo apt-get install -y jq
-
-      - name: 🧨 Build Jekyll Site
+      - name: 🧨 Build Jekyll site
         run: bundle exec jekyll build --source docs --destination _site
 
-      - name: 📤 Upload via GitHub Pages API (NO deprecated artifacts)
-        run: |
-          ZIP_FILE="artifacts.zip"
-          zip -r $ZIP_FILE _site/
+      - name: 📤 Upload Pages artifact (NOT deprecated)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
 
-          # Get upload URL
-          UPLOAD_URL=$(curl -s -X POST \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/${{ github.repository }}/pages/builds \
-            -d '{}' | jq -r '.upload_url')
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-          # Upload the ZIP
-          curl -X PUT \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/zip" \
-            --data-binary @"$ZIP_FILE" \
-            "$UPLOAD_URL"
-
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: 🟩 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
