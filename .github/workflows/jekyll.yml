@@ -47,15 +47,46 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build with Jekyll
-        # Build from the /docs folder
-        run: bundle exec jekyll build --source docs --baseurl "${{ steps.pages.outputs.base_path }}"
+        # Outputs to the './_site' directory by default
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
 
-      # 🔥 Google Sitemap Ping – notifies Google of updated content
-      - name: Ping Google Sitemap
+      # ========== NEW FEATURE 1: Validate the build ==========
+      - name: ✅ Validate built site
         run: |
-          curl -s "https://www.google.com/ping?sitemap=https://android-kyc-lab.github.io/android-v4l2-kernel-camera-injection-bypass/sitemap.xml"
+          if [ ! -f "_site/index.html" ]; then
+            echo "❌ ERROR: _site/index.html not found – build failed!"
+            exit 1
+          fi
+          echo "✅ Site built successfully: $(find _site -type f | wc -l) files"
+
+      # ========== NEW FEATURE 2: Check for broken links (optional) ==========
+      # - name: 🔗 Check for broken links
+      #   run: |
+      #     gem install html-proofer
+      #     htmlproofer ./_site --disable-external --assume-extension --allow-hash-href
+      #   continue-on-error: true   # Won't fail the workflow, but logs warnings
+
+      # ========== NEW FEATURE 3: Generate .nojekyll to bypass GitHub Pages Jekyll processing ==========
+      - name: 📄 Create .nojekyll (bypass GitHub Pages Jekyll)
+        run: touch _site/.nojekyll
+
+      # ========== NEW FEATURE 4: Ping Google (only) ==========
+      - name: 📣 Ping Google (sitemap)
+        run: |
+          SITE_URL="https://${{ steps.pages.outputs.hostname }}${{ steps.pages.outputs.base_path }}"
+          curl -s "https://www.google.com/ping?sitemap=${SITE_URL}/sitemap.xml" || echo "Google ping skipped"
+        continue-on-error: true   # Won't fail the deployment if search engines are unreachable
+
+      # ========== NEW FEATURE 5: Compress static assets (gzip) ==========
+      - name: 🗜️ Gzip compress static assets
+        run: |
+          find _site -type f -name "*.html" -exec gzip -k -9 {} \;
+          find _site -type f -name "*.css" -exec gzip -k -9 {} \;
+          find _site -type f -name "*.js" -exec gzip -k -9 {} \;
+          find _site -type f -name "*.xml" -exec gzip -k -9 {} \;
+          echo "✅ Gzip compression completed"
 
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
