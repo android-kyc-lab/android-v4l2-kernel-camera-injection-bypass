@@ -1,114 +1,29 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll site to Pages
+name: 🚀 Deploy Static Site (No Jekyll)
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: [$default-branch]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+    branches: [main]
 
 jobs:
-  # Build job
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Setup Ruby
-        # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
-        uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4
-        with:
-          ruby-version: '3.1' # Not needed with a .ruby-version file
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-          cache-version: 1 # Increment this number if you need to re-download cached gems
-
-      # --- NEW FEATURE 1: Install additional Jekyll plugins (if not in Gemfile) ---
-      - name: Install additional Jekyll plugins
-        run: |
-          gem install jekyll-seo-tag jekyll-sitemap jekyll-feed --no-document
-        # Advantage: Ensures SEO tags, sitemap, and feed are available even if not in Gemfile.
-        # Pitfall: If these are already in Gemfile, this step is redundant but harmless.
-
-      # --- NEW FEATURE 2: Set custom environment variables for SEO ---
-      - name: Set SEO environment variables
-        run: |
-          echo "JEKYLL_ENV=production" >> $GITHUB_ENV
-          echo "JEKYLL_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
-        # Advantage: Allows Jekyll to use GitHub token for enhanced features like GitHub metadata.
-        # Pitfall: Requires that your Jekyll configuration uses these variables.
-
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v5
-
-      # --- NEW FEATURE 3: Build with additional options (verbose, trace) for debugging ---
-      - name: Build with Jekyll
-        # Outputs to the './_site' directory by default
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}" --verbose --trace
-        env:
-          JEKYLL_ENV: production
-        # Advantage: --verbose and --trace provide detailed logs, making it easier to catch errors.
-        # Pitfall: May produce a lot of output, but it's helpful for debugging.
-
-      # --- NEW FEATURE 4: Validate HTML (broken link check) ---
-      - name: Validate HTML
-        run: |
-          sudo apt-get install -y linkchecker
-          linkchecker _site/index.html --ignore-url "mailto:.*" --check-extern
-        # Advantage: Catches broken internal or external links before deployment.
-        # Pitfall: External link checks can fail due to network issues; you may want to disable --check-extern.
-
-      # --- NEW FEATURE 5: Ping Google Sitemap (NO Bing) ---
-      - name: Ping Google Sitemap
-        run: |
-          SITEMAP_URL="https://${{ steps.pages.outputs.host }}/${{ steps.pages.outputs.base_path }}/sitemap.xml"
-          curl -s "https://www.google.com/ping?sitemap=$SITEMAP_URL" || echo "Google ping failed (non-critical)"
-        # Advantage: Notifies Google to recrawl your site after each deploy.
-        # Pitfall: Google may not immediately index; this is a best-effort ping.
-
-      - name: Upload artifact
-        # Automatically uploads an artifact from the './_site' directory by default
-        uses: actions/upload-pages-artifact@v3
-
-      # --- NEW FEATURE 6: Notify on failure (optional) ---
-      - name: Notify on failure
-        if: failure()
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-               -d '{"text":"🚨 Jekyll build failed for ${{ github.repository }}! Check logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}' \
-               "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}"
-        # Advantage: Immediate alert if the build breaks.
-        # Pitfall: Requires setting up TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID secrets in GitHub.
-        # You can remove this step if you don't want Telegram notifications.
-
-  # Deployment job
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+      - name: 🔥 Check out repo
+        uses: actions/checkout@v4
+
+      - name: 📁 Prepare _site by copying docs
+        run: |
+          mkdir -p _site
+          cp -r docs/* _site/
+
+      - name: 📤 Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+      - name: 🟩 Deploy to Pages
+        uses: actions/deploy-pages@v4
