@@ -1,0 +1,34 @@
+name: 🚀 Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: 🔥 Check out repo
+        uses: actions/checkout@v4
+
+      - name: 🛠️ Setup Ruby & Build Site
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: 🧨 Build Jekyll Site
+        run: bundle exec jekyll build --source docs --destination _site
+
+      - name: 📦 Upload Artifact for Deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site/
+
+      - name: 💣 DEPLOY TO GITHUB PAGES (THE FUCKING FINAL STEP)
+        id: deploy-pages
+        uses: actions/deploy-pages@v4
